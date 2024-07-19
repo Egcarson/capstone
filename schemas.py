@@ -17,6 +17,11 @@ class UserUpdate(UserBase):
     pass
 
 
+class UserLogin(BaseModel):
+    username: str
+    password: str
+
+
 class User(UserBase):
     id: int
     is_active: bool = True
