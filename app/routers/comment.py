@@ -34,7 +34,7 @@ async def add_comment(comment_payload: schemas.CommentCreate, movie_title: str =
             detail="Movie not found"
         )
 
-    logger.info(f"Successfully added comment for movie {movie_title}")
+    logger.info("Successfully added comment for movie")
     return {"message": "successfully added", "data": comment}
 
 
@@ -61,7 +61,7 @@ async def get_comments(movie_title: str, skip: int = 0, limit: int = 10, db: Ses
     comments = comment_crud.get_comments_for_movie(
         movie_title, skip, limit, db)
 
-    logger.info(f"Successfully fetched comments for movie {movie_title}")
+    logger.info("Successfully fetched comments for movie")
     return comments
 
 
@@ -93,7 +93,7 @@ async def add_nested_comment(reply: schemas.CommentCreate, comment_id: int, db: 
             detail=f"Failed to add a reply to comment with the id {comment_id}"
         )
 
-    logger.info(f"Successfully added reply to comment with id {comment_id}")
+    logger.info("Successfully added reply to comment")
     return comment_reply
 
     # replies = comment_crud.get_comment_with_replies(comment_id, db)

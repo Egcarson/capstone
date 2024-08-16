@@ -55,7 +55,7 @@ def login(current_user: OAuth2PasswordRequestForm = Depends(), db: Session = Dep
 
     # create access token
     access_token = oauth2.create_access_token(data={"user_id": user.id})
-    logger.info(f"access_token generated successfully. User with username: {
-                current_user.username} logged in successfully")
+    logger.info(
+        "access_token generated successfully. User logged in successfully")
     # return access token
     return {"access_token": access_token, "token_type": "Bearer"}

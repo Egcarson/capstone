@@ -42,7 +42,7 @@ def create_movie(movie_in: schemas.MovieCreate, db: Session = Depends(database.g
 
     if validate_create_request:
         logger.warning(
-            f"{user.username} have already listed this movie, movie listing aborted....")
+            "this user have already listed this movie, movie listing aborted....")
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=f"Hello {
@@ -76,16 +76,16 @@ def get_movie_title(title: str, db: Session = Depends(database.get_db)):
 @router.put('/movies/{title}', status_code=status.HTTP_202_ACCEPTED, response_model=schemas.Movie)
 def update_movie(title: str, movie_in: schemas.MovieUpdate, db: Session = Depends(database.get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
 
-    logger.info(f"An attempt to update {title} has been made:")
+    logger.info("An attempt to update movie has been made:")
     movie = movie_crud.get_movie_by_title(title, db)
     if not movie:
-        logger.error(f"{title} not found. Movie update failed.")
+        logger.error("movie not found. Movie update failed.")
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Oops!....we can't find {title}. Please try again"
         )
 
-    logger.info(f"Validating if the user is authorized to update {title}.")
+    logger.info("Validating if the user is authorized to update movie.")
     if int(movie.user_id) != int(current_user.id):
         logger.error("An error occurred while updating. User not authorized.")
         raise HTTPException(
@@ -95,7 +95,7 @@ def update_movie(title: str, movie_in: schemas.MovieUpdate, db: Session = Depend
 
     logger.info("Update intitiated")
     update_movie = movie_crud.update_movie(title, movie_in, db)
-    logger.info(f"Update on {title} is successful.")
+    logger.info("Update on movie is successful.")
     return update_movie
 
 
@@ -112,7 +112,7 @@ def delete_movie(title: str, db: Session = Depends(database.get_db), current_use
             detail=f"Oops!....we can't find {title}. Please try again"
         )
 
-    logger.info(f"Validating if the user is authorized to delete {title}.")
+    logger.info("Validating if the user is authorized to delete a movie.")
     if int(movie.user_id) != int(current_user.id):
         logger.error("Validation failed. Request aborted..............")
         raise HTTPException(
