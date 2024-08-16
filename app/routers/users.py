@@ -45,8 +45,8 @@ def update_user(id: int, user_in: schemas.UserUpdate, db: Session = Depends(data
     logger.info("Updating User:")
     user = user_crud.get_user_by_id(id, db)
     if not user:
-        logger.error(f"An error occurred while updating. {
-                     user_in.username} not found")
+        logger.error(
+            "An error occurred while updating. User not found. Updating aborted.........")
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
