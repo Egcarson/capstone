@@ -45,8 +45,7 @@ def create_movie(movie_in: schemas.MovieCreate, db: Session = Depends(database.g
             "this user have already listed this movie, movie listing aborted....")
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Hello {
-                user.username}, you've already added this movie. Please check your list of movies."
+            detail="Hello, you've already added this movie. Please check your list of movies."
         )
 
     new_movie = movie_crud.create_movie(movie_in, db, current_user)
@@ -65,8 +64,7 @@ def get_movie_title(title: str, db: Session = Depends(database.get_db)):
             "An error occurred while retreiving the movie. Movie not found and aborted.")
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Sorry dear, {
-                title} does not exist. Please check back later."
+            detail="Sorry dear, movie not exist. Please check back later."
         )
     logger.info(
         "Request completed. Movie is available and retrieved successfully.")
@@ -82,7 +80,7 @@ def update_movie(title: str, movie_in: schemas.MovieUpdate, db: Session = Depend
         logger.error("movie not found. Movie update failed.")
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Oops!....we can't find {title}. Please try again"
+            detail="Oops!....we can't find this movie. Please try again"
         )
 
     logger.info("Validating if the user is authorized to update movie.")
@@ -109,7 +107,7 @@ def delete_movie(title: str, db: Session = Depends(database.get_db), current_use
         logger.error("An error occured. Movie not found")
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Oops!....we can't find {title}. Please try again"
+            detail="Oops!....we can't find the movie. Please try again"
         )
 
     logger.info("Validating if the user is authorized to delete a movie.")

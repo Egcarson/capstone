@@ -81,7 +81,7 @@ async def add_nested_comment(reply: schemas.CommentCreate, comment_id: int, db: 
         logger.warning("No comment with the specified id")
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"No comment with id {comment_id}"
+            detail="No comment with the id"
         )
 
     comment_reply = comment_crud.add_nested_comment(
@@ -90,7 +90,7 @@ async def add_nested_comment(reply: schemas.CommentCreate, comment_id: int, db: 
         logger.error("Failed to add a reply to comment with the specified id")
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Failed to add a reply to comment with the id {comment_id}"
+            detail="Failed to add a reply to comment with the id"
         )
 
     logger.info("Successfully added reply to comment")

@@ -39,8 +39,7 @@ async def rate_movie(rating_payload: schemas.RatingCreate, movie_title: str, db:
         logger.error(
             "This movie has already been rated by the current user. Rating aborted............")
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Sorry {
-                user.username}, rating is only allowed once."
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Sorry dear, rating is only allowed once."
         )
 
     rated_movie = rating_crud.rate_movie(
