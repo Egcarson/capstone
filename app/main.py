@@ -9,6 +9,7 @@ from app.logger import get_logger
 logger = get_logger(__name__)
 
 # create database tables based on defined models
+# you can remove this if you are pulling with alembic
 models.Base.metadata.create_all(bind=engine)
 
 origins = ["*"]  # Sir this is for development purposes
